@@ -1,0 +1,26 @@
+begin
+    Initialize the training parameters: WEP, TDR, lb, ub,Max-iteration
+    Create a set of random individualize based on the problem dimension
+    for each individual do
+        Calculate the MSE for the individual
+        if the current MSE < the global minimal MSE
+            Update the global minimal MSE
+        end if
+    end for
+    for iteration (t) <= Max-iteration do
+        for each individual do
+            Calculate the parameter of MVO: WEP, TDR
+            Run the optimization process
+            Exchange objects between the universes
+            Objects to each universe teleport to do the best universe
+        end for
+        for each individual do
+            Calculate the MSE for individual
+            if the new current MSE < minimal MSE
+                Update the globally minimal MSE
+            end if
+        end for
+        Save the current best solution with the minimal MSE
+    end for
+    return the best solution of the minimal MSE
+end
