@@ -39,7 +39,7 @@ def make_tf(fr_data):
         max_idx = np.argmax(row)
         tf_row = [0] * cols
         for c in range(cols):
-            tf_row[c] = format(float(row[c])/float(row[max_idx]),'.8f')
+            tf_row[c] = format(float(row[c])/float(row[max_idx]),'.4f')
         tf.append(tf_row)
     return tf
 
@@ -69,6 +69,10 @@ def write_csv(tf_idf,file_path):
         writer.writerows(tf_idf)
     print("CSV DocTermMatrix file '{}' has been created.".format(file_path) )
 
+def write_similar_csv(sim_matrix,file_path):
+    np.savetxt(file_path, similarity_matrix, delimiter=',', fmt='%.4f')
+    print("CSV DocTermMatrix file '{}' has been created.".format(file_path) )
+
 qs_fr = make_fr(qs_data)
 qs_tf = make_tf(qs_fr)
 idf_data = make_idf('./IRSys23_IDF.csv')
@@ -85,12 +89,11 @@ write_csv(qs_tf_idf,'./Qs_TF-IDF.csv')
 tf_idf_data = read_csv('./IRSys23_Docs.csv')
 # print(f"\n{tf_idf_data[99]}")
 
-
 tf_idf_data = np.array(tf_idf_data)
 qs_tf_idf = np.array(qs_tf_idf)
 
 similarity_matrix = cosine_similarity(qs_tf_idf,tf_idf_data)
 similarity_matrix = np.round(similarity_matrix, decimals=4)
-print(similarity_matrix.shape)
 
-write_csv(similarity_matrix,'./S213158.csv')
+# write_csv(similarity_matrix,'./S213158.csv')
+write_similar_csv(similarity_matrix,'./S213158.csv')
