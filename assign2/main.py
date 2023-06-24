@@ -95,5 +95,4 @@ qs_tf_idf = np.array(qs_tf_idf)
 similarity_matrix = cosine_similarity(qs_tf_idf,tf_idf_data)
 similarity_matrix = np.round(similarity_matrix, decimals=4)
 
-# write_csv(similarity_matrix,'./S213158.csv')
 write_similar_csv(similarity_matrix,'./S213158.csv')
