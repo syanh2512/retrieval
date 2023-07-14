@@ -43,7 +43,7 @@ def write_csv(trproba_matrix,file_path):
     with open(file_path,'w',newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(trproba_matrix)
-    print("\nCSV Transition Probability Matrix file '{}' has been created.\n".format(file_path) )
+    print("\nCSV file '{}' has been created.\n".format(file_path) )
 
 
 web_links = read_csv('./IRSys23_WebLinks.csv')
@@ -69,3 +69,6 @@ max_eigenvector = eigenvectors[:, max_eigenvalue_index]
 
 print("\nMaximum Eigenvalue:\n", np.abs(max_eigenvalue))
 print("Corresponding Eigenvector:\n", np.abs(max_eigenvector))
+max_eigenvector_normalized = np.around(max_eigenvector / np.sum(max_eigenvector),decimals=4)
+print("Normalized Eigenvector:\n", np.abs(max_eigenvector_normalized))
+np.savetxt('./P213158.csv',np.abs(max_eigenvector_normalized.reshape(1,-1)),fmt='%.4f',delimiter=',')
